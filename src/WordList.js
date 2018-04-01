@@ -10,7 +10,9 @@ export class WordList extends Component {
                 { id: 'ab125', en: 'Three', vn: 'Ba', isMemorized: false },
                 { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
             ],
-            shouldShowForm: false
+            shouldShowForm: false,
+            txtEn: '',
+            txtVn: ''
         };
         this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
     }
@@ -71,9 +73,19 @@ export class WordList extends Component {
         );
         return (
             <div className="form-group" style={{ width: '200px' }}>
-                <input className="form-control" placeholder="English" />
+                <input
+                    className="form-control"
+                    placeholder="English"
+                    value={this.state.txtEn}
+                    onChange={evt => this.setState({ txtEn: evt.target.value })}
+                />
                 <br />
-                <input className="form-control" placeholder="Vietnamese" />
+                <input
+                    className="form-control"
+                    placeholder="Vietnamese"
+                    value={this.state.txtVn}
+                    onChange={evt => this.setState({ txtVn: evt.target.value })}
+                />
                 <br />
                 <button className="btn btn-success">Add word</button>
                 <button
