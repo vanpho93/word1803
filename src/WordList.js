@@ -12,7 +12,8 @@ export class WordList extends Component {
             ],
             shouldShowForm: false,
             txtEn: '',
-            txtVn: ''
+            txtVn: '',
+            filterMode: 'SHOW_ALL' // SHOW_FORGOT, SHOW_MEMORIZED
         };
         this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
         this.addWord = this.addWord.bind(this);
@@ -117,6 +118,18 @@ export class WordList extends Component {
             <div>
                 <br />
                 { this.getForm() }
+                <br />
+                <br />
+                <select
+                    className="form-control"
+                    style={{ width: '200px' }}
+                    value={this.state.filterMode}
+                    onChange={evt => this.setState({ filterMode: evt.target.value })}
+                >
+                    <option value="SHOW_ALL">SHOW ALL</option>
+                    <option value="SHOW_FORGOT">SHOW FORGOT</option>
+                    <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
+                </select>
                 { this.genListWord() }
             </div>
         );
