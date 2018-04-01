@@ -15,6 +15,19 @@ export class WordList extends Component {
             txtVn: ''
         };
         this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
+        this.addWord = this.addWord.bind(this);
+    }
+
+    addWord() {
+        const { txtEn, txtVn, words } = this.state;
+        const id = Math.round(Math.random() * 10000) + '';
+        const word = { en: txtEn, vn: txtVn, id, isMemorized: false };
+        this.setState({
+            words: [word, ...words],
+            shouldShowForm: false,
+            txtEn: '',
+            txtVn: ''
+        }); 
     }
 
     removeWord(id) {
@@ -87,17 +100,7 @@ export class WordList extends Component {
                     onChange={evt => this.setState({ txtVn: evt.target.value })}
                 />
                 <br />
-                <button className="btn btn-success" onClick={() => {
-                    const { txtEn, txtVn, words } = this.state;
-                    const id = Math.round(Math.random() * 10000) + '';
-                    const word = { en: txtEn, vn: txtVn, id, isMemorized: false };
-                    this.setState({
-                        words: [word, ...words],
-                        shouldShowForm: false,
-                        txtEn: '',
-                        txtVn: ''
-                    });     
-                }}>
+                <button className="btn btn-success" onClick={this.addWord}>
                     Add word
                 </button>
                 <button
