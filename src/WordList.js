@@ -12,6 +12,7 @@ export class WordList extends Component {
             ],
             shouldShowForm: false
         };
+        this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
     }
 
     removeWord(id) {
@@ -55,19 +56,40 @@ export class WordList extends Component {
         return this.state.words.map(renderWord);
     }
 
+    toggleShouldShowForm() {
+        this.setState({ shouldShowForm: !this.state.shouldShowForm });
+    }
+
+    getForm() {
+        if (!this.state.shouldShowForm) return (
+            <button
+                className="btn btn-success"
+                onClick={this.toggleShouldShowForm}
+            >
+                Create new word
+            </button>
+        );
+        return (
+            <div className="form-group" style={{ width: '200px' }}>
+                <input className="form-control" placeholder="English" />
+                <br />
+                <input className="form-control" placeholder="Vietnamese" />
+                <br />
+                <button className="btn btn-success">Add word</button>
+                <button
+                    className="btn btn-danger"
+                    onClick={this.toggleShouldShowForm}
+                >
+                    Cancel
+                </button>
+            </div>
+        );
+    }
     render() {
         return (
             <div>
                 <br />
-                <div className="form-group" style={{ width: '200px' }}>
-                    <input className="form-control" placeholder="English" />
-                    <br />
-                    <input className="form-control" placeholder="Vietnamese" />
-                    <br />
-                    <button className="btn btn-success">Add word</button>
-                    <button className="btn btn-danger">Cancel</button>
-                </div>
-                <button className="btn btn-success">Create new word</button>
+                { this.getForm() }
                 { this.genListWord() }
             </div>
         );
