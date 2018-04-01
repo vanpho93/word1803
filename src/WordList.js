@@ -87,7 +87,19 @@ export class WordList extends Component {
                     onChange={evt => this.setState({ txtVn: evt.target.value })}
                 />
                 <br />
-                <button className="btn btn-success">Add word</button>
+                <button className="btn btn-success" onClick={() => {
+                    const { txtEn, txtVn, words } = this.state;
+                    const id = Math.round(Math.random() * 10000) + '';
+                    const word = { en: txtEn, vn: txtVn, id, isMemorized: false };
+                    this.setState({
+                        words: [word, ...words],
+                        shouldShowForm: false,
+                        txtEn: '',
+                        txtVn: ''
+                    });     
+                }}>
+                    Add word
+                </button>
                 <button
                     className="btn btn-danger"
                     onClick={this.toggleShouldShowForm}
