@@ -13,20 +13,37 @@ export class WordList extends Component {
         };
     }
 
+    removeWord(id) {
+        const newWords = this.state.words.filter(w => w.id !== id);
+        this.setState({ words: newWords });
+    }
+
     render() {
-        // this.state.words
         return (
             <div>
-                <div className="word">
-                    <div className="word-container">
-                        <h3 className="text-success">one</h3>
-                        <h3 className="text-danger">một</h3>
-                    </div>
-                        <div className="btn-container">
-                        <button className="btn btn-success">Forgot</button>
-                        <button className="btn btn-warning">Remove</button>
-                    </div>
-                </div>
+                {
+                    this.state.words.map(word => (
+                        <div className="word" key={word.id}>
+                            <div className="word-container">
+                                <h3 className="text-success">{word.en}</h3>
+                                <h3 className="text-danger">
+                                    { word.isMemorized ? '-----' : word.vn }
+                                </h3>
+                            </div>
+                                <div className="btn-container">
+                                <button className="btn btn-success">
+                                    { word.isMemorized ? 'Forgot' : 'Memorized' }
+                                </button>
+                                <button
+                                    className="btn btn-warning"
+                                    onClick={() => this.removeWord(word.id)}
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         );
     }
