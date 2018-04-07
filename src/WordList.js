@@ -45,6 +45,7 @@ export class WordList extends Component {
     }
 
     genListWord() {
+        const { filterMode, words } = this.state;
         const renderWord = word => (
             <div className="word" key={word.id}>
                 <div className="word-container">
@@ -69,7 +70,12 @@ export class WordList extends Component {
                 </div>
             </div>
         );
-        return this.state.words.map(renderWord);
+        const filteredWords = words.filter(w => {
+            if (filterMode === 'SHOW_ALL') return true;
+            if (filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
+            return !w.isMemorized;
+        });
+        return filteredWords.map(renderWord);
     }
 
     toggleShouldShowForm() {
