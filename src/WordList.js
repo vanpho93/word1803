@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Word } from './Word';
+import { WordFilter } from './WordFilter';
 
 export class WordList extends Component {
     constructor(props) {
@@ -105,16 +106,7 @@ export class WordList extends Component {
                 { this.getForm() }
                 <br />
                 <br />
-                <select
-                    className="form-control"
-                    style={{ width: '200px' }}
-                    value={this.state.filterMode}
-                    onChange={evt => this.setState({ filterMode: evt.target.value })}
-                >
-                    <option value="SHOW_ALL">SHOW ALL</option>
-                    <option value="SHOW_FORGOT">SHOW FORGOT</option>
-                    <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
-                </select>
+                <WordFilter filterMode={this.state.filterMode} />
                 { this.genListWord() }
             </div>
         );
