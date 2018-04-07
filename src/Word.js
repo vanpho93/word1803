@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export class Word extends Component {
     render() {
-        const { wordInfo } = this.props;
+        const { wordInfo, onRemoveWord } = this.props;
         return (
             <div className="word">
                 <div className="word-container">
@@ -19,6 +19,7 @@ export class Word extends Component {
                     </button>
                     <button
                         className="btn btn-warning"
+                        onClick={() => onRemoveWord(wordInfo.id)}
                     >
                         Remove
                     </button>

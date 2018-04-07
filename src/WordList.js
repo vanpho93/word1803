@@ -18,6 +18,7 @@ export class WordList extends Component {
         };
         this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
         this.addWord = this.addWord.bind(this);
+        this.onRemoveWord = this.onRemoveWord.bind(this);
     }
 
     addWord() {
@@ -32,7 +33,7 @@ export class WordList extends Component {
         }); 
     }
 
-    removeWord(id) {
+    onRemoveWord(id) {
         const newWords = this.state.words.filter(w => w.id !== id);
         this.setState({ words: newWords });
     }
@@ -52,7 +53,7 @@ export class WordList extends Component {
             if (filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
             return !w.isMemorized;
         });
-        return filteredWords.map(word => <Word wordInfo={word} key={word.id} />);
+        return filteredWords.map(word => <Word wordInfo={word} key={word.id} onRemoveWord={this.onRemoveWord} />);
     }
 
     toggleShouldShowForm() {
