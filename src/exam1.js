@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+
+export class Parent extends Component {
+    constructor(props) {
+        super(props);
+        this.state  = { count: 10 };
+        this.increase = this.increase.bind(this);
+        this.descrease = this.descrease.bind(this);
+        this.reset = this.reset.bind(this);
+    }
+
+    increase() {
+        this.setState({ count: this.state.count + 1 });
+    }
+
+    descrease() {
+        this.setState({ count: this.state.count - 1 });
+    }
+
+    reset() {
+        this.setState({ count: 0});
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>Value = {this.state.count}</h3>
+                <Child />
+            </div>
+        );
+    }
+}
+
+class Child extends Component {
+    render() {
+        return (
+            <div>
+                <button className="btn btn-success" onClick={this.increase}>Increase</button>
+                <button className="btn btn-primary" onClick={this.descrease}>Descrease</button>
+                <button className="btn btn-danger" onClick={this.reset}>Reset</button>
+            </div>
+        );
+    }
+}
