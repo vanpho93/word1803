@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Word } from './Word';
 import { WordFilter } from './WordFilter';
+import { WordForm } from './WordForm';
 
 export class WordList extends Component {
     constructor(props) {
@@ -66,49 +67,11 @@ export class WordList extends Component {
         this.setState({ shouldShowForm: !this.state.shouldShowForm });
     }
 
-    getForm() {
-        if (!this.state.shouldShowForm) return (
-            <button
-                className="btn btn-success"
-                onClick={this.toggleShouldShowForm}
-            >
-                Create new word
-            </button>
-        );
-        return (
-            <div className="form-group" style={{ width: '200px' }}>
-                <input
-                    className="form-control"
-                    placeholder="English"
-                    value={this.state.txtEn}
-                    onChange={evt => this.setState({ txtEn: evt.target.value })}
-                />
-                <br />
-                <input
-                    className="form-control"
-                    placeholder="Vietnamese"
-                    value={this.state.txtVn}
-                    onChange={evt => this.setState({ txtVn: evt.target.value })}
-                />
-                <br />
-                <button className="btn btn-success" onClick={this.addWord}>
-                    Add word
-                </button>
-                <button
-                    className="btn btn-danger"
-                    onClick={this.toggleShouldShowForm}
-                >
-                    Cancel
-                </button>
-            </div>
-        );
-    }
-
     render() {
         return (
             <div>
                 <br />
-                { this.getForm() }
+                <WordForm shouldShowForm={this.state.shouldShowForm} />
                 <br />
                 <br />
                 <WordFilter
