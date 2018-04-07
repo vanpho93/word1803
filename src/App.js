@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        {/* <WordList /> */}
+        <WordList />
         {/* <MyInput /> */}
-        <Parent />
+        {/* <Parent /> */}
       </div>
     );
   }

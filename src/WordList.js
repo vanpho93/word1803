@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Word } from './Word';
 
 export class WordList extends Component {
     constructor(props) {
@@ -46,36 +47,12 @@ export class WordList extends Component {
 
     genListWord() {
         const { filterMode, words } = this.state;
-        const renderWord = word => (
-            <div className="word" key={word.id}>
-                <div className="word-container">
-                    <h3 className="text-success">{word.en}</h3>
-                    <h3 className="text-danger">
-                        { word.isMemorized ? '-----' : word.vn }
-                    </h3>
-                </div>
-                    <div className="btn-container">
-                    <button
-                        className="btn btn-success"
-                        onClick={() => this.toggleWord(word.id)}
-                    >
-                        { word.isMemorized ? 'Forgot' : 'Memorized' }
-                    </button>
-                    <button
-                        className="btn btn-warning"
-                        onClick={() => this.removeWord(word.id)}
-                    >
-                        Remove
-                    </button>
-                </div>
-            </div>
-        );
         const filteredWords = words.filter(w => {
             if (filterMode === 'SHOW_ALL') return true;
             if (filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
             return !w.isMemorized;
         });
-        return filteredWords.map(renderWord);
+        return filteredWords.map(word => <Word wordInfo={word} key={word.id} />);
     }
 
     toggleShouldShowForm() {
