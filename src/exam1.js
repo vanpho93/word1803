@@ -4,20 +4,20 @@ export class Parent extends Component {
     constructor(props) {
         super(props);
         this.state  = { count: 10 };
-        this.increase = this.increase.bind(this);
-        this.descrease = this.descrease.bind(this);
-        this.reset = this.reset.bind(this);
+        this.onIncrease = this.onIncrease.bind(this);
+        this.onDescrease = this.onDescrease.bind(this);
+        this.onReset = this.onReset.bind(this);
     }
 
-    increase() {
+    onIncrease() {
         this.setState({ count: this.state.count + 1 });
     }
 
-    descrease() {
+    onDescrease() {
         this.setState({ count: this.state.count - 1 });
     }
 
-    reset() {
+    onReset() {
         this.setState({ count: 0});
     }
 
@@ -26,9 +26,9 @@ export class Parent extends Component {
             <div>
                 <h3>Value = {this.state.count}</h3>
                 <Child
-                    increase={this.increase}
-                    descrease={this.descrease}
-                    reset={this.reset}
+                    onIncrease={this.onIncrease}
+                    onDescrease={this.onDescrease}
+                    onReset={this.onReset}
                 />
             </div>
         );
@@ -37,16 +37,16 @@ export class Parent extends Component {
 
 class Child extends Component {
     render() {
-        const { increase, descrease, reset } = this.props;
+        const { onIncrease, onDescrease, onReset } = this.props;
         return (
             <div>
-                <button className="btn btn-success" onClick={increase}>
+                <button className="btn btn-success" onClick={onIncrease}>
                     Increase
                 </button>
-                <button className="btn btn-primary" onClick={descrease}>
+                <button className="btn btn-primary" onClick={onDescrease}>
                     Descrease
                 </button>
-                <button className="btn btn-danger" onClick={reset}>
+                <button className="btn btn-danger" onClick={onReset}>
                     Reset
                 </button>
             </div>
