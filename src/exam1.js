@@ -25,7 +25,11 @@ export class Parent extends Component {
         return (
             <div>
                 <h3>Value = {this.state.count}</h3>
-                <Child />
+                <Child
+                    increase={this.increase}
+                    descrease={this.descrease}
+                    reset={this.reset}
+                />
             </div>
         );
     }
@@ -33,11 +37,18 @@ export class Parent extends Component {
 
 class Child extends Component {
     render() {
+        const { increase, descrease, reset } = this.props;
         return (
             <div>
-                <button className="btn btn-success" onClick={this.increase}>Increase</button>
-                <button className="btn btn-primary" onClick={this.descrease}>Descrease</button>
-                <button className="btn btn-danger" onClick={this.reset}>Reset</button>
+                <button className="btn btn-success" onClick={increase}>
+                    Increase
+                </button>
+                <button className="btn btn-primary" onClick={descrease}>
+                    Descrease
+                </button>
+                <button className="btn btn-danger" onClick={reset}>
+                    Reset
+                </button>
             </div>
         );
     }
