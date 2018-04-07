@@ -6,11 +6,9 @@ export class WordForm extends Component {
         this.state = { txtEn: '', txtVn: '' };
     }
     render() {
-        const { shouldShowForm } = this.props;
+        const { shouldShowForm, onToggleShouldShowForm, onAddWord } = this.props;
         if (!shouldShowForm) return (
-            <button
-                className="btn btn-success"
-            >
+            <button className="btn btn-success" onClick={onToggleShouldShowForm}>
                 Create new word
             </button>
         );
@@ -30,12 +28,17 @@ export class WordForm extends Component {
                     onChange={evt => this.setState({ txtVn: evt.target.value })}
                 />
                 <br />
-                <button className="btn btn-success">
+                <button
+                    className="btn btn-success"
+                    onClick={() => {
+                        const { txtEn, txtVn } = this.state;
+                        onAddWord(txtEn, txtVn);
+                        this.setState({ txtEn: '', txtVn: '' });
+                    }}
+                >
                     Add word
                 </button>
-                <button
-                    className="btn btn-danger"
-                >
+                <button className="btn btn-danger" onClick={onToggleShouldShowForm}>
                     Cancel
                 </button>
             </div>

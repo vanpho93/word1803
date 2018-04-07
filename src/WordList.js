@@ -14,25 +14,21 @@ export class WordList extends Component {
                 { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
             ],
             shouldShowForm: false,
-            txtEn: '',
-            txtVn: '',
             filterMode: 'SHOW_ALL' // SHOW_FORGOT, SHOW_MEMORIZED
         };
-        this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
-        this.addWord = this.addWord.bind(this);
         this.onRemoveWord = this.onRemoveWord.bind(this);
         this.onSetFilterMode = this.onSetFilterMode.bind(this);
+        this.onToggleShouldShowForm = this.onToggleShouldShowForm.bind(this);
+        this.onAddWord = this.onAddWord.bind(this);
     }
 
-    addWord() {
-        const { txtEn, txtVn, words } = this.state;
+    onAddWord(txtEn, txtVn) {
+        const { words } = this.state;
         const id = Math.round(Math.random() * 10000) + '';
         const word = { en: txtEn, vn: txtVn, id, isMemorized: false };
         this.setState({
             words: [word, ...words],
             shouldShowForm: false,
-            txtEn: '',
-            txtVn: ''
         }); 
     }
 
@@ -63,7 +59,7 @@ export class WordList extends Component {
         return filteredWords.map(word => <Word wordInfo={word} key={word.id} onRemoveWord={this.onRemoveWord} />);
     }
 
-    toggleShouldShowForm() {
+    onToggleShouldShowForm() {
         this.setState({ shouldShowForm: !this.state.shouldShowForm });
     }
 
@@ -71,7 +67,11 @@ export class WordList extends Component {
         return (
             <div>
                 <br />
-                <WordForm shouldShowForm={this.state.shouldShowForm} />
+                <WordForm
+                    shouldShowForm={this.state.shouldShowForm}
+                    onToggleShouldShowForm={this.onToggleShouldShowForm}
+                    onAddWord={this.onAddWord}
+                />
                 <br />
                 <br />
                 <WordFilter
