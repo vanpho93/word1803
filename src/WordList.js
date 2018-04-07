@@ -119,6 +119,7 @@ export class WordList extends Component {
             </div>
         );
     }
+
     render() {
         return (
             <div>
