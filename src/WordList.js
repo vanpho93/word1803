@@ -20,6 +20,7 @@ export class WordList extends Component {
         this.toggleShouldShowForm = this.toggleShouldShowForm.bind(this);
         this.addWord = this.addWord.bind(this);
         this.onRemoveWord = this.onRemoveWord.bind(this);
+        this.onSetFilterMode = this.onSetFilterMode.bind(this);
     }
 
     addWord() {
@@ -45,6 +46,10 @@ export class WordList extends Component {
             return { ...w, isMemorized: !w.isMemorized };
         });
         this.setState({ words: newWords });
+    }
+
+    onSetFilterMode(filterMode) {
+        this.setState({ filterMode });
     }
 
     genListWord() {
@@ -106,7 +111,10 @@ export class WordList extends Component {
                 { this.getForm() }
                 <br />
                 <br />
-                <WordFilter filterMode={this.state.filterMode} />
+                <WordFilter
+                    filterMode={this.state.filterMode}
+                    onSetFilterMode={this.onSetFilterMode}    
+                />
                 { this.genListWord() }
             </div>
         );
