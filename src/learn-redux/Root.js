@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { Parent } from './Parent';
-import './store';
+import { Provider } from 'react-redux';
+
+import { store } from './store';
 
 export class Root extends Component {
     render() {
-        return <Parent />;
+        return (
+            <Provider store={store}>
+                <Parent />
+            </Provider>
+        );
     }
 }

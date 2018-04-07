@@ -8,14 +8,3 @@ function reducer(state = { count: 0 }, action) {
 }
 
 export const store = createStore(reducer);
-
-console.log(store.getState());
-store.dispatch({ type: 'INCREASE' });
-store.dispatch({ type: 'INCREASE' });
-store.dispatch({ type: 'INCREASE' });
-store.dispatch({ type: 'INCREASE' });
-console.log(store.getState());
-store.dispatch({ type: 'DESCREASE' });
-console.log(store.getState());
-store.dispatch({ type: 'RESET' });
-console.log(store.getState());
