@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export class Word extends Component {
     render() {
-        const { wordInfo, onRemoveWord } = this.props;
+        const { wordInfo, onRemoveWord, onToggleWord } = this.props;
         return (
             <div className="word">
                 <div className="word-container">
@@ -14,6 +14,7 @@ export class Word extends Component {
                     <div className="btn-container">
                     <button
                         className="btn btn-success"
+                        onClick={() => onToggleWord(wordInfo.id)}
                     >
                         { wordInfo.isMemorized ? 'Forgot' : 'Memorized' }
                     </button>

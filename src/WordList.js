@@ -20,6 +20,7 @@ export class WordList extends Component {
         this.onSetFilterMode = this.onSetFilterMode.bind(this);
         this.onToggleShouldShowForm = this.onToggleShouldShowForm.bind(this);
         this.onAddWord = this.onAddWord.bind(this);
+        this.onToggleWord = this.onToggleWord.bind(this);
     }
 
     onAddWord(txtEn, txtVn) {
@@ -37,7 +38,7 @@ export class WordList extends Component {
         this.setState({ words: newWords });
     }
 
-    toggleWord(id) {
+    onToggleWord(id) {
         const newWords = this.state.words.map(w => {
             if (w.id !== id) return w;
             return { ...w, isMemorized: !w.isMemorized };
@@ -56,7 +57,14 @@ export class WordList extends Component {
             if (filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
             return !w.isMemorized;
         });
-        return filteredWords.map(word => <Word wordInfo={word} key={word.id} onRemoveWord={this.onRemoveWord} />);
+        return filteredWords.map(word => (
+            <Word
+                wordInfo={word}
+                key={word.id}
+                onRemoveWord={this.onRemoveWord}
+                onToggleWord={this.onToggleWord}
+            />
+        ));
     }
 
     onToggleShouldShowForm() {

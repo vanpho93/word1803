@@ -4,9 +4,18 @@ export class WordForm extends Component {
     constructor(props) {
         super(props);
         this.state = { txtEn: '', txtVn: '' };
+        this.addWord = this.addWord.bind(this);
     }
+
+    addWord() {
+        const { onAddWord } = this.props;
+        const { txtEn, txtVn } = this.state;
+        onAddWord(txtEn, txtVn);
+        this.setState({ txtEn: '', txtVn: '' });
+    }
+
     render() {
-        const { shouldShowForm, onToggleShouldShowForm, onAddWord } = this.props;
+        const { shouldShowForm, onToggleShouldShowForm } = this.props;
         if (!shouldShowForm) return (
             <button className="btn btn-success" onClick={onToggleShouldShowForm}>
                 Create new word
@@ -30,11 +39,7 @@ export class WordForm extends Component {
                 <br />
                 <button
                     className="btn btn-success"
-                    onClick={() => {
-                        const { txtEn, txtVn } = this.state;
-                        onAddWord(txtEn, txtVn);
-                        this.setState({ txtEn: '', txtVn: '' });
-                    }}
+                    onClick={this.addWord}
                 >
                     Add word
                 </button>
