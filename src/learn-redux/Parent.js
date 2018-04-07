@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Child } from './Child';
 
-export class Parent extends Component {
-    constructor(props) {
-        super(props);
-    }
+class ParentComponent extends Component {
     render() {
         return (
             <div>
-                <h3>Value = 0</h3>
+                <h3>Value = {this.props.count}</h3>
                 <Child />
             </div>
         );
     }
 }
+
+const mapState = state => ({ count: state.count });
+
+export const Parent = connect(mapState)(ParentComponent);
