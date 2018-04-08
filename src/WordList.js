@@ -1,57 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Word } from './Word';
 import { WordFilter } from './WordFilter';
 import { WordForm } from './WordForm';
 
-export class WordList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            words: [
-                { id: 'ab123', en: 'One', vn: 'Mot', isMemorized: true },
-                { id: 'ab124', en: 'Two', vn: 'Hai', isMemorized: false },
-                { id: 'ab125', en: 'Three', vn: 'Ba', isMemorized: false },
-                { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
-            ],
-            shouldShowForm: false,
-            filterMode: 'SHOW_ALL' // SHOW_FORGOT, SHOW_MEMORIZED
-        };
-        this.onRemoveWord = this.onRemoveWord.bind(this);
-        this.onSetFilterMode = this.onSetFilterMode.bind(this);
-        this.onToggleShouldShowForm = this.onToggleShouldShowForm.bind(this);
-        this.onAddWord = this.onAddWord.bind(this);
-        this.onToggleWord = this.onToggleWord.bind(this);
-    }
-
-    onAddWord(txtEn, txtVn) {
-        const { words } = this.state;
-        const id = Math.round(Math.random() * 10000) + '';
-        const word = { en: txtEn, vn: txtVn, id, isMemorized: false };
-        this.setState({
-            words: [word, ...words],
-            shouldShowForm: false,
-        }); 
-    }
-
-    onRemoveWord(id) {
-        const newWords = this.state.words.filter(w => w.id !== id);
-        this.setState({ words: newWords });
-    }
-
-    onToggleWord(id) {
-        const newWords = this.state.words.map(w => {
-            if (w.id !== id) return w;
-            return { ...w, isMemorized: !w.isMemorized };
-        });
-        this.setState({ words: newWords });
-    }
-
-    onSetFilterMode(filterMode) {
-        this.setState({ filterMode });
-    }
-
+class WordListComponent extends Component {
     genListWord() {
-        const { filterMode, words } = this.state;
+        const { filterMode, words } = this.props;
         const filteredWords = words.filter(w => {
             if (filterMode === 'SHOW_ALL') return true;
             if (filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
@@ -67,27 +22,20 @@ export class WordList extends Component {
         ));
     }
 
-    onToggleShouldShowForm() {
-        this.setState({ shouldShowForm: !this.state.shouldShowForm });
-    }
-
     render() {
         return (
             <div>
                 <br />
-                <WordForm
-                    shouldShowForm={this.state.shouldShowForm}
-                    onToggleShouldShowForm={this.onToggleShouldShowForm}
-                    onAddWord={this.onAddWord}
-                />
+                <WordForm />
                 <br />
                 <br />
-                <WordFilter
-                    filterMode={this.state.filterMode}
-                    onSetFilterMode={this.onSetFilterMode}    
-                />
+                <WordFilter />
                 { this.genListWord() }
             </div>
         );
     }
 }
+
+const mapState = state => ({ filterMode: state.filterMode, words: state.words });
+
+export const WordList = connect(mapState)(WordListComponent);
