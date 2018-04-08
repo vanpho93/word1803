@@ -9,9 +9,15 @@ class WordFormComponent extends Component {
     }
 
     addWord() {
-        const { onAddWord } = this.props;
+        const { dispatch } = this.props;
         const { txtEn, txtVn } = this.state;
-        onAddWord(txtEn, txtVn);
+        const word = {
+            id: Math.random() + '',
+            en: txtEn,
+            vn: txtVn,
+            isMemorized: false
+        };
+        dispatch({ type: 'ADD_WORD', word });
         this.setState({ txtEn: '', txtVn: '' });
     }
 

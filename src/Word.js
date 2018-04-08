@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 class WordComponent extends Component {
     render() {
-        const { wordInfo, dispatch, onToggleWord } = this.props;
+        const { wordInfo, dispatch } = this.props;
         return (
             <div className="word">
                 <div className="word-container">
@@ -15,7 +15,7 @@ class WordComponent extends Component {
                     <div className="btn-container">
                     <button
                         className="btn btn-success"
-                        onClick={() => onToggleWord(wordInfo.id)}
+                        onClick={() => dispatch({ type: 'TOGGLE_WORD', id: wordInfo.id })}
                     >
                         { wordInfo.isMemorized ? 'Forgot' : 'Memorized' }
                     </button>
