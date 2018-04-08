@@ -8,10 +8,13 @@ const defaultState = {
         { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
     ],
     shouldShowForm: false,
-    filterMode: 'SHOW_FORGOT' // SHOW_FORGOT, SHOW_MEMORIZED
+    filterMode: 'SHOW_ALL' // SHOW_FORGOT, SHOW_MEMORIZED
 }
 
 function reducer(state = defaultState, action) {
+    if (action.type === 'TOGGLE_SHOW_SHOW_FORM') {
+        return { ...state, shouldShowForm: !state.shouldShowForm };
+    }
     return state;
 }
 
