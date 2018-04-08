@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export class WordFilter extends Component {
+class WordFilterComponent extends Component {
     render() {
         const { onSetFilterMode } = this.props;
         return (
@@ -17,3 +18,5 @@ export class WordFilter extends Component {
         );
     }
 }
+const mapState = state => ({ filterMode: state.filterMode });
+export const WordFilter = connect(mapState)(WordFilterComponent);

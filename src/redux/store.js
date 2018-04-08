@@ -8,7 +8,7 @@ const defaultState = {
         { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
     ],
     shouldShowForm: false,
-    filterMode: 'SHOW_ALL' // SHOW_FORGOT, SHOW_MEMORIZED
+    filterMode: 'SHOW_FORGOT' // SHOW_FORGOT, SHOW_MEMORIZED
 }
 
 function reducer(state = defaultState, action) {
