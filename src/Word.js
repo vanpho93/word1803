@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export class Word extends Component {
+class WordComponent extends Component {
     render() {
-        const { wordInfo, onRemoveWord, onToggleWord } = this.props;
+        const { wordInfo, dispatch, onToggleWord } = this.props;
         return (
             <div className="word">
                 <div className="word-container">
@@ -20,7 +21,7 @@ export class Word extends Component {
                     </button>
                     <button
                         className="btn btn-warning"
-                        onClick={() => onRemoveWord(wordInfo.id)}
+                        onClick={() => dispatch({ type: 'REMOVE_WORD', id: wordInfo.id })}
                     >
                         Remove
                     </button>
@@ -29,3 +30,5 @@ export class Word extends Component {
         );
     }
 }
+
+export const Word = connect()(WordComponent);

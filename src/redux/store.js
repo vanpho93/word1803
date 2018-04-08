@@ -15,6 +15,12 @@ function reducer(state = defaultState, action) {
     if (action.type === 'TOGGLE_SHOW_SHOW_FORM') {
         return { ...state, shouldShowForm: !state.shouldShowForm };
     }
+    if (action.type === 'SET_FILTER_MODE') {
+        return { ...state, filterMode: action.filterMode };
+    }
+    if (action.type === 'REMOVE_WORD') {
+        return { ...state, words: state.words.filter(word => word.id !== action.id) };
+    }
     return state;
 }
 
