@@ -7,42 +7,30 @@ const words = [
     { id: 'ab126', en: 'Four', vn: 'Bon', isMemorized: true },
 ]
 
-// function reducer(state = defaultState, action) {
-    //     if (action.type === 'TOGGLE_SHOW_SHOW_FORM') {
-    //         return { ...state, shouldShowForm: !state.shouldShowForm };
-    //     }
-    //     if (action.type === 'SET_FILTER_MODE') {
-    //         return { ...state, filterMode: action.filterMode };
-    //     }
-    //     if (action.type === 'REMOVE_WORD') {
-    //         return { ...state, words: state.words.filter(word => word.id !== action.id) };
-    //     }
-    //     if (action.type === 'TOGGLE_WORD') {
-    //         const words = state.words.map(word => {
-    //             if (word.id !== action.id) return word;
-    //             return { ...word, isMemorized: !word.isMemorized };
-    //         });
-    //         return { ...state, words };
-    //     }
-    //     if (action.type === 'ADD_WORD') {
-    //         return {
-    //             ...state,
-    //             words: [action.word, ...state.words],
-    //             shouldShowForm: false
-    //         }
-    //     }
-    //     return state;
-// }
-
 function wordsReducer(state = words, action) {
+    if (action.type === 'REMOVE_WORD') {
+        return state.filter(word => word.id !== action.id);
+    }
+    if (action.type === 'TOGGLE_WORD') {
+        return state.map(word => {
+            if (word.id !== action.id) return word;
+            return { ...word, isMemorized: !word.isMemorized };
+        });
+    }
+    if (action.type === 'ADD_WORD') {
+        return [action.word, ...state]
+    }
     return state;
 }
 
 function shouldShowFormReducer(state = false, action) {
+    if (action.type === 'TOGGLE_SHOW_SHOW_FORM') return !state;
+    if (action.type === 'ADD_WORD') return false;
     return state;
 }
 
 function filterModeReducer(state = 'SHOW_ALL', action) {
+    if (action.type === 'SET_FILTER_MODE') return action.filterMode;
     return state;
 }
 
