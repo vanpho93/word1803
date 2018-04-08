@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export class WordForm extends Component {
+class WordFormComponent extends Component {
     constructor(props) {
         super(props);
         this.state = { txtEn: '', txtVn: '' };
@@ -50,3 +51,6 @@ export class WordForm extends Component {
         );
     }
 }
+
+const mapState = state => ({ shouldShowForm: state.shouldShowForm });
+export const WordForm = connect(mapState)(WordFormComponent);
