@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from './redux/actionCreators';
 
 class WordComponent extends Component {
     render() {
-        const { wordInfo, dispatch } = this.props;
+        const { wordInfo, removeWord, toggleWord } = this.props;
         return (
             <div className="word">
                 <div className="word-container">
@@ -15,13 +16,13 @@ class WordComponent extends Component {
                     <div className="btn-container">
                     <button
                         className="btn btn-success"
-                        onClick={() => dispatch({ type: 'TOGGLE_WORD', id: wordInfo.id })}
+                        onClick={() => toggleWord(wordInfo.id)}
                     >
                         { wordInfo.isMemorized ? 'Forgot' : 'Memorized' }
                     </button>
                     <button
                         className="btn btn-warning"
-                        onClick={() => dispatch({ type: 'REMOVE_WORD', id: wordInfo.id })}
+                        onClick={() => removeWord(wordInfo.id)}
                     >
                         Remove
                     </button>
@@ -31,4 +32,4 @@ class WordComponent extends Component {
     }
 }
 
-export const Word = connect()(WordComponent);
+export const Word = connect(null, actionCreators)(WordComponent);

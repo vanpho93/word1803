@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from './redux/actionCreators';
 
 class WordFormComponent extends Component {
     constructor(props) {
@@ -9,24 +10,18 @@ class WordFormComponent extends Component {
     }
 
     addWord() {
-        const { dispatch } = this.props;
+        const { addWord } = this.props;
         const { txtEn, txtVn } = this.state;
-        const word = {
-            id: Math.random() + '',
-            en: txtEn,
-            vn: txtVn,
-            isMemorized: false
-        };
-        dispatch({ type: 'ADD_WORD', word });
+        addWord(txtEn, txtVn);
         this.setState({ txtEn: '', txtVn: '' });
     }
 
     render() {
-        const { shouldShowForm, dispatch } = this.props;
+        const { shouldShowForm, toggleShouldShowForm } = this.props;
         if (!shouldShowForm) return (
             <button
                 className="btn btn-success"
-                onClick={() => dispatch({ type: 'TOGGLE_SHOW_SHOW_FORM' })}
+                onClick={toggleShouldShowForm}
             >
                 Create new word
             </button>
@@ -55,7 +50,7 @@ class WordFormComponent extends Component {
                 </button>
                 <button
                     className="btn btn-danger"
-                    onClick={() => dispatch({ type: 'TOGGLE_SHOW_SHOW_FORM' })}
+                    onClick={toggleShouldShowForm}
                 >
                     Cancel
                 </button>
@@ -65,4 +60,4 @@ class WordFormComponent extends Component {
 }
 
 const mapState = state => ({ shouldShowForm: state.shouldShowForm });
-export const WordForm = connect(mapState)(WordFormComponent);
+export const WordForm = connect(mapState, actionCreators)(WordFormComponent);
